@@ -44,11 +44,11 @@ public:
     PixelSet(hdps::CoreInterface* core, QString dataName) : DataSet(core, dataName) { }
     ~PixelSet() override { }
 
-    void createSubset() const override
+    QString createSubset() const override
     {
         const hdps::DataSet& selection = _core->requestSelection(getDataName());
 
-        _core->createSubsetFromSelection(selection, getDataName(), "Subset");
+        return _core->createSubsetFromSelection(selection, *this, "Subset");
     }
 
     DataSet* copy() const override;
